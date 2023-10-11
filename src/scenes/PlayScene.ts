@@ -3,12 +3,14 @@ import { GameParameter } from '../entity/GameParameter';
 import { Platform } from '../entity/Platform';
 import { Player } from '../entity/Player';
 import { Obstacle } from '../entity/Obstacle';
+import { Score } from '../entity/Score';
 
 export default class PlayScene extends Phaser.Scene {
     private param: GameParameter = new GameParameter();
     private platforms!: Platform;
     private player!: Player;
     private obstacles!: Obstacle;
+    private score!: Score;
 
     constructor() {
         super('PlayScene');
@@ -34,6 +36,10 @@ export default class PlayScene extends Phaser.Scene {
         this.obstacles.generate(this, 'staticObstacle');
         this.obstacles.generate(this, 'movingObstacle');
 
+        // score
+        this.score = new Score(this);
+        this.score.get();
+
         // collider
         this.physics.add.collider(this.player.get(), this.platforms.get());
         this.physics.add.collider(this.player.get(), this.obstacles.get(), () => {
@@ -47,5 +53,6 @@ export default class PlayScene extends Phaser.Scene {
         this.param.speedUp();
         this.platforms.moving(this.param);
         this.obstacles.moving(this.param);
+        this.score.increase(this.param.getSpeed());
     }
 }

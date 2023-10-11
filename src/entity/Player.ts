@@ -3,7 +3,7 @@ import { GameParameter } from "./GameParameter";
 export class Player {
     private main!: Phaser.Physics.Arcade.Sprite;
     private initPosX: number = 100;
-    private initPosY: number = 450;
+    private initPosY: number = 400;
     private jumpPower: number = 1500;
     private canAirJump: boolean = false;
 

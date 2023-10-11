@@ -4,18 +4,15 @@ import PlayScene from './scenes/PlayScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
-	// width: 800,
-	// height: 500,
 	physics: {
 		default: 'arcade',
 		arcade: {
-			// gravity: { y: 2000 },
 			debug: true
 		}
 	},
 	scale: {
 		parent: 'game',
-		mode: Phaser.Scale.RESIZE,
+		mode: Phaser.Scale.FIT,
 	},
 	scene: [PlayScene]
 }
