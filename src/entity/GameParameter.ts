@@ -1,6 +1,6 @@
 export class GameParameter {
     private speed: number = 5;
-    private increaseSpeed: number = 0.002;
+    private increaseSpeed: number = 0.1;
     private gravity: number = 3000;
     private height: number = 100;
 

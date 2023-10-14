@@ -12,7 +12,7 @@ export class Score {
     get() { return this.scoreText; }
 
     increase(num: number) {
-        this.score += num;
+        this.score += Math.floor(num);
         this.scoreText.setText('Hight Score: ' + this.hightScore + ' / Score: ' + this.score);
     }
 

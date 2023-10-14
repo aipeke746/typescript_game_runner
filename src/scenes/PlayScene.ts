@@ -47,6 +47,14 @@ export default class PlayScene extends Phaser.Scene {
         // score
         this.score = new Score(this);
         this.score.get();
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                this.param.speedUp();
+                this.score.increase(this.param.getSpeed());
+            },
+            loop: true
+        })
 
         // collider
         this.physics.add.collider(this.player.get(), this.platforms.get());
@@ -61,11 +69,9 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     update() {
-        this.param.speedUp();
         this.platforms.moving(this.param);
         this.obstacles.forEach(obstacle => {
             obstacle.moving(this.param);
         });
-        this.score.increase(this.param.getSpeed());
     }
 }
