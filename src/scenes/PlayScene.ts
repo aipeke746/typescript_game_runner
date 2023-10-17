@@ -21,21 +21,30 @@ export default class PlayScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('platform', 'assets/platform.png');
-        this.load.image('player', 'assets/player.png');
-        // obstacle types
-        this.load.image('sleep', 'assets/sleep.png');
-        this.load.image('cry', 'assets/cry.png');
-        this.load.image('so-so', 'assets/so-so.png');
-        this.load.image('happy', 'assets/happy.png');
+        this.load.image('platform', 'assets/image/platform.png');
+        this.load.image('player', 'assets/image/player.png');
+        // image: obstacle type
+        this.load.image('sleep', 'assets/image/sleep.png');
+        this.load.image('cry', 'assets/image/cry.png');
+        this.load.image('so-so', 'assets/image/so-so.png');
+        this.load.image('happy', 'assets/image/happy.png');
+        // sound
+        this.load.audio('jump', 'assets/sound/jump.mp3');
+        this.load.audio('damage', 'assets/sound/damage.mp3');
+        this.load.audio('die', 'assets/sound/die.mp3');
     }
 
     create() {
+        // sound
+        const jumpSound = this.sound.add('jump');
+        const dieSound = this.sound.add('die');
+
         // platforms
         this.platforms = new Platform(this, this.param);
 
         // player
         this.player = new Player(this, this.param);
+        this.player.setJumpSound(jumpSound);
         this.player.jump(this);
 
         // obstacles
@@ -64,6 +73,7 @@ export default class PlayScene extends Phaser.Scene {
                 // game over
                 this.physics.pause();
                 this.player.get().setTint(0xff0000);
+                dieSound.play();
             }, undefined, this);
         });
     }
